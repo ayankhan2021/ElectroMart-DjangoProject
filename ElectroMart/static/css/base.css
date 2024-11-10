@@ -1,0 +1,249 @@
+
+
+
+/* <--------------------------------------- Imports  ---------------------------------------> */
+
+/* ==================== Font =================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* <---------------------------------------  CSS  ---------------------------------------> */
+
+/* ==================== Base CSS =================== */
+
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+}
+
+
+
+/* ==================== Car Rental Logo =================== */
+
+
+
+/* ==================== NavBar =================== */
+
+/* .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--navbar--bg--color);
+    padding: 2rem 6rem 0 6rem;
+}
+
+.nav__items {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 4rem;
+}
+
+.nav__link {
+    z-index: var(--second--normal--z-index);
+    font-weight: var(--weight--semibold);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 60px;
+}
+
+.active{
+    color: var(--font--primary--color);
+    transition: all 0.5s ease-in-out;
+}
+
+.account__btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    column-gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.account__box{
+    margin-top: -1rem;
+    height: 55px ;
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    background-color: var(--font--primary--color);
+    border-radius: 100px;
+    padding: 1rem;
+    cursor: pointer;
+    margin-left: -2rem;
+    margin-bottom: 0.5rem;
+}
+
+.account__box img{
+    border-radius: 50%;
+    background-color:#fff;
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+}
+
+.account__box p{
+    color: var(--font--white--color);
+    font-weight: var(--weight--semibold);
+    text-transform: capitalize;
+}
+
+
+.account__box img{
+    border-radius: 50%;
+    background-color:#fff;
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+}
+
+.account__box p{
+    color: var(--font--white--color);
+    font-weight: var(--weight--semibold);
+} */
+
+:root{
+    --font-size-xs: 12px; /* Extra small */
+    --font-size-sm: 14px; /* Small */
+    --font-size-base: 16px; /* Base size, typically for body text */
+    --font-size-lg: 18px; /* Large */
+    --font-size-xl: 20px; /* Extra large */
+    --font-size-2xl: 24px; /* 2x Extra large */
+    --font-size-3xl: 30px; /* 3x Extra large */
+}
+
+.navbar{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img{
+    height: 85px;
+    width: 192px;
+    margin-left: 90px;
+    
+}
+
+.nav__items{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 17px;
+}
+
+.nav__items > a{
+    color: black;
+    text-decoration: none;
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+}
+
+
+.nav__items > a:hover{
+    color: #0163d2;
+}
+
+.button1{
+    border-radius: 15px;
+    font-weight: 605;
+    font-size: 16px;
+    font-family: Open Sans;
+    color: #ffffff;
+    background-color: #fff;
+    border: none;
+    width: 88px;
+    height: 38px;
+}
+
+.button1:hover{
+    background-color: #000;
+}
+
+.account__btns{
+    display: flex;
+    gap: 15px;
+    margin-right: 68px;
+}
+
+/* .account__btns a{
+    display: block;
+    margin-top: 5px;
+    height: 40px;
+    text-decoration: none;
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+} */
+
+.buttonclass1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 3px;
+    width: 120px;
+    height: 53px;
+    font-weight: bold;
+    border: 2px solid #0163d2;
+    transition: 0.3s;
+    background-color: #0163d2;
+}
+.buttonclass2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #0163d2;
+    font-size: 18px;
+    border-radius: 3px;
+    width: 120px;
+    height: 53px;
+    font-weight: bold;
+    border: 2px solid gray;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+
+.buttonclass1:hover{
+    background-color: #242424;
+    border: #242424;
+}
+
+.buttonclass2:hover{
+    background-color: #242424;
+    color: white;
+}
+
+
+.active {
+    color: #0163d2; 
+    border-bottom: 4px solid #0163d2;
+}
+
+
+
+/* ==================== NAVBAR ANIMATION =================== */
+
+.hidden-up{
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 1s;
+}
+
+
+.show {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+
