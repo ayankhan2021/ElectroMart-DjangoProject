@@ -26,7 +26,9 @@
           <a href="{% url 'categories' %}"
             class="nav__link {% if request.path == '/categories' %}  {% endif %}">Categories</a>
           <a href="{% url 'userdashboard' %}"
-            class="nav__link {% if request.path == '/userDashboard' or request.path == '/userDashboard/reviews' or request.path == '/userDashboard/orders' %} {% endif %}">Dashboard</a>
+            class="nav__link {% if user.is_authenticated %} action {% else %} guest {% endif %}">
+            Dashboard
+          </a>
           <a href="{% url 'contact' %}"
             class="nav__link {% if request.path == '/contact' %}  {% endif %}">Contact</a>
         </ul>

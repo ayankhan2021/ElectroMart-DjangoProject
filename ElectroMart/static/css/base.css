@@ -242,20 +242,27 @@ body {
 }
 
 
+.action{
+    display: flex;
+}
+
+.guest{
+    display: none;
+}
+
 
 /* ==================== NAVBAR ANIMATION =================== */
 
 .hidden-up {
     opacity: 0;
-    display: none;
-    transform: translateY(-100%);
+    transform: translateX(100%);
     transition: all 1s;
 }
 
 
 .show {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateX(0%);
 }
 
 

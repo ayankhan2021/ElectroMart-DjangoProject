@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/userdashboard.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="profile__main__header">
+    <h1>Dashboard</h1>
+</div>
+
+<section
+    style="background: #f5f8fa; padding: 90px 0 90px 0; position: relative">
+    <div class="main__user__dashboard container">
+        <div class="profile__dashboard">
+            <div class="profile__view">
+                <img src="{% static './svgs/1-green.svg' %}" alt />
+                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                <p>{{ user.email }}</p>
+            </div>
+
+            <ul class="select__view">
+                <li class="dashboard_links buttonActive">
+                    <i class="fa-solid fa-house-chimney"></i><a
+                        href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="dashboard_links">
+                    <i class="fa-solid fa-user"></i><a
+                        href="{% url 'reviews' %}">Reviews</a>
+                </li>
+                <li class="dashboard_links">
+                    <i class="fa-solid fa-calendar-days"></i><a
+                        href="{% url 'my_orders' %}">My Order</a>
+                </li>
+                <li class="dashboard_links">
+                    <i class="fa-solid fa-car"></i><a href="#">My Favorite
+                        Car</a>
+                </li>
+                <li class="dashboard_links">
+                    <i class="fa-solid fa-right-from-bracket"></i><a
+                        id="user-signout">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="rentaly__dashboard">
+            <div class="rentaly__dashboard__innerbox1">
+                <div class="rentaly__spec1fication__box">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <h1>{{ completed_orders }}</h1>
+                    <p>Completed Orders</p>
+                </div>
+                <div class="rentaly__spec1fication__box">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <h1>{{ upcoming_orders }}</h1>
+                    <p>Upcoming Orders</p>
+                </div>
+                <div class="rentaly__spec1fication__box">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <h1>{{ cancelled_orders }}</h1>
+                    <p>Cancel Orders</p>
+                </div>
+                <div class="rentaly__spec1fication__box">
+                    <i class="fa-solid fa-tags"></i>
+                    <h1>{{ cars_rented }}</h1>
+                    <p>Cars Rented</p>
+                </div>
+            </div>
+            <div class="rentaly__dashboard__innerbox2">
+                <h4>My Recent Orders</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Car Name</th>
+                            <th>Booking date</th>
+                            <th>Pick Up Date</th>
+                            <th>Return Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rental in recent_orders %}
+                        <tr>
+                            <td><span class="order__id">#{{ rental.id
+                                    }}</span></td>
+                            <td>
+                                <p>{{ rental.car.variant.model.manufacturer }}
+                                    {{ rental.car.variant.model.name }}
+                                    {{rental.car.variant.variant_name }}</p>
+                            </td>
+                            <td>
+                                <p>{{ rental.booking_date }}</p>
+                            </td>
+                            <td>
+                                <p>{{ rental.pickup_date }}</p>
+                            </td>
+                            <td>
+                                <p>{{ rental.drop_date }}</p>
+                            </td>
+                            <td> <span class="status"
+                                    style="border: 1px solid #404040; border-radius: 10px;">{{
+                                    rental.status.name }}</span></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/logout.js' %}"></script>
+{% endblock %}

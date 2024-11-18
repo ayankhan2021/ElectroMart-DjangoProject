@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib import messages
 from store.models import Product, Category, Order, OrderItem, Payment, Cart, CartItem
-from .models import Product
 
 
 
@@ -27,8 +26,14 @@ def contact(request):
     return render(request, "contact.html")
 
 
+@login_required
 def userdashboard(request):
-    return render(request, "userdashboard.html")
+    # user = request.user
+    # orders = Order.objects.filter(user=user).order_by('-order_date')  # Fetch orders for the logged-in user
+    if request.user.is_authenticated:
+        return render(request, 'userdashboard.html')
+    
+    return redirect('login')  # Redirect to login page if user is not authenticated
 
 
 def login(request):
@@ -71,7 +76,7 @@ def signup(request):
 
 
 # Logout view (optional)
-def logout(request):
+def logout_view(request):
     print("Logout view called")  # Debugging line
     logout(request)
     messages.success(request, "You have been logged out successfully.")

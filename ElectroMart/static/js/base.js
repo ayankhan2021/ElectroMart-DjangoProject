@@ -36,9 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       alert.style.transition = "opacity 0.5s ease";
       alert.style.opacity = "0";
-      setTimeout(() => alert.remove(), 500); // Remove after fade-out
-    }, 3000); // Adjust time as needed (3000ms = 3s)
-
+      setTimeout(() => alert.remove(), 500); 
+    }, 3000);
   });
-  
 });
