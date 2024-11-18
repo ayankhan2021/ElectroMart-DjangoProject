@@ -160,6 +160,11 @@ function slideToPreviousCat(){
     catCont.style.transform = `translateX(-${CatIndex * catItemWidth}px)`;
 }
 
+if (totalCatItems > 3) {
+    document.querySelector('.cat_next').addEventListener("click", slideToNextCat);
+    document.querySelector('.cat_prev').addEventListener("click", slideToPreviousCat);
+}
+
 let a = {
     "product": {
       "name": "iPhone 8 Pro",

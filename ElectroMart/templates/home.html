@@ -348,7 +348,16 @@
                 </div>
             </div>
             <div class="right_lower">
-                <img class="cat_prev cat_prnx" style="color: red;" onclick="slideToPreviousCat()"  src="{% static 'svgs/prev.png' %}" alt="">
+                <button style="    
+                position: absolute;
+                left: -14px;
+                background-color: transparent;
+                top: 50%;
+                border:none;
+                height: 46px;
+                width: 46px;
+                z-index: 111;
+                border-radius: 50%;"><img class="cat_prev cat_prnx" style="color: red;" src="{% static 'svgs/prev.svg' %}" alt=""></button>
                 <div class="cat_wrapper">
                     <div class="cat_item">
                         <div class="cat_image">
@@ -455,7 +464,7 @@
                         </div>
                     </div>
                 </div>
-                <img class="cat_next cat_prnx" onclick="slideToNextCat()" src="{% static 'svgs/next.png' %}" alt="">
+                <button style="position: absolute;right: 6px; top: 50%;"><img style="position: absolute;top: -2px; left: -53px;" class="cat_next cat_prnx" src="{% static 'svgs/next.svg' %}" alt=""></button>
             </div>
         </div>
     </div>
@@ -501,15 +510,16 @@
                 <a href="#">VIEW MORE</a>
             </div>  </div>
         <div class="cat4 cat_boxes">
+            <img src="{% static 'categories/gaming_cat.png' %}" alt="">
             <div class="category_content">
                 <h4>Gaming Accessories</h4>
                 <a href="#">VIEW MORE</a>
             </div>  </div>
-        <div class="cat5 cat_boxes">
+        <!-- <div class="cat5 cat_boxes">
             <div class="category_content">
                 <h4>Audio Devices</h4>
                 <a href="#">VIEW MORE</a>
-            </div>  </div>
+            </div>  </div> -->
         <div class="cat6 cat_boxes">
             <div class="category_content">
                 <h4>Televisions & Projectors</h4>
@@ -517,17 +527,18 @@
             </div>  </div>
         <div class="cat7 cat_boxes">
             <div class="category_content">
-                <h4>TVs & Projectors</h4>
+                <h4>Tablets & iPads</h4>
                 <a href="#">VIEW MORE</a>
             </div>  </div>
         <div class="cat8 cat_boxes">
+            <img src="{% static 'categories/product02.png.webp' %}" alt="">
             <div class="category_content">
-                <h4>Televisions & Projectors</h4>
+                <h4>wearable technologies</h4>
                 <a href="#">VIEW MORE</a>
             </div>  </div>
         <div class="cat9 cat_boxes">
             <div class="category_content">
-                <h4>Headphones & Audio</h4>
+                <h4>Laptops & Computers</h4>
                 <a href="#">VIEW MORE</a>
             </div>  
         </div>

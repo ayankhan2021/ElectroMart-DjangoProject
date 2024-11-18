@@ -1,10 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-   
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="contact__main__header">
+
+</div>
+
+<div class="main__contact__container container">
+    <div class="contact__rentaly">
+        <h2>Do you have any question?</h2>
+        <div class="contact__info">
+            <input class="user_name" type="text" placeholder="Your Name"
+                id="name">
+            <input class="user_email" type="email" placeholder="Your Email"
+                id="email">
+            <input class="ph_no" type="tel" placeholder="Your Phone"
+                id="phonenumber" maxlength="11">
+        </div>
+        <textarea class="message" name="message" id
+            placeholder="Your Message"></textarea>
+
+        <button type="submit" style="border:none;">
+            <span class="top"></span>
+            <a href="#" style="width: 185px;height: 56px" class="buttonclass1 send__mail" id="btn">Send
+                Message</a>
+            <span class="bottom"></span>
+        </button>
+    </div>
+
+    <div class="main__testimonial">
+        <div class="testimonial__header">
+            <h3 style="color: #121212;font-size: 2em;" class>Testimonial</h3>
+            <span></span>
+        </div>
+        <div class="testimonial__wrapper">
+            <div class="quote-icon">
+                <i class="fa-solid fa-quote-left" id="quote"></i>
+            </div>
+            <div class="testimonial-container" id="testimonial-container"></div>
+            <button id="prev">&lt;</button>
+            <button id="next">&gt;</button>
+        </div>
+    </div>
+</div>
+
+<h2 style="text-align: center;font-size: 2em;">
+    Our <span class="styling__content"> Location</span>
+    <span class="underline__style"></span>
+</h2>
+<div class="location__container container">
+    <div class="contact__specification hidden">
+        <div class="contact__offices hidden">
+            <h2 style="font-size: 1.7rem;">Karachi Office</h2>
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Asia Pacific Trade Center, Rashid Minhas Rd, Block 19
+                    Gulistan-e-Johar</p>
+            </div>
+            <p><i class="fa-solid fa-phone"></i> &nbsp; +92 3368522620</p>
+            <p style="color: #0163d2">
+                <i class="fa-solid fa-envelope"></i> &nbsp;
+                muhammadzunain2004@gmail.com
+            </p>
+        </div>
+        <div class="contact__offices hidden">
+            <h2 style="font-size: 1.7rem;">Islamabad Office</h2>
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <p>Al Tawakal Market, Office # 1, First Floor, G15، 4 Grand
+                    Trunk Road، G-15</p>
+            </div>
+            <p><i class="fa-solid fa-phone"></i> &nbsp; +92 3095783353</p>
+            <p style="color: #0163d2">
+                <i class="fa-solid fa-envelope"></i> &nbsp;
+                usmanfaizyabkhan@gmail.com
+            </p>
+        </div>
+        <div class="contact__offices hidden">
+            <h2 style="font-size: 1.7rem;">Multan Office</h2>
+
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <p>165 G Block Shah Rukne Alam Colony Multan</p>
+            </div>
+
+            <p><i class="fa-solid fa-phone"></i> &nbsp; +92 3412073063</p>
+            <p style="color: #0163d2">
+                <i class="fa-solid fa-envelope"></i> &nbsp; ayankhan@gmail.com
+            </p>
+        </div>
+    </div>
+    <div class="map__upper__container">
+        <div class="map-container">
+            <img src="../static/svgs/pk.svg" alt />
+            <div class="marker karachi-dot" title="Karachi"></div>
+            <div class="marker-label karachi-label">Karachi</div>
+            <div class="marker islamabad-dot" title="Islamabad"></div>
+            <div class="marker-label islamabad-label">Islamabad</div>
+            <div class="marker multan-dot" title="Multan"></div>
+            <div class="marker-label multan-label">Multan</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}

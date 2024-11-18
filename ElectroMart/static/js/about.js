@@ -36,8 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const review = reviews[index];
         reviewContainer.innerHTML = `
             <div class="review">
-                <img src="${review.image_url}" alt="${review.reviewer_name}" class="review-image"
-                onerror="this.src='../static/images/default_profile.png'">
+                <img src="${review.image_url}" alt="${review.reviewer_name}" class="review-image">
                 <span class="reviewer-name">${review.reviewer_name}</span>
                 <span class="rating_stars">${'★'.repeat(review.rating)}</span>
                 <p class="review-text">${review.review_text}</p>
@@ -144,4 +143,3 @@ for (let i = 0; i < counters.length; i++) {
 //         alert(`Statistic: ${label}\nNumber: ${number}`);
 //     });
 // });
-

@@ -50,7 +50,12 @@
     flex-wrap: wrap;
     column-gap: 2rem;
     position: relative;
-    top: 16px
+    top: 16px;
+    
+}
+
+.footer__contact__content a{
+    text-decoration: none;
 }
 
 
@@ -105,9 +110,44 @@
     margin-top: 11px;
 }
 
+.footer__social__links a{
+    text-decoration: none;
+}
+
+.footer__social__links a:hover {
+    transform: scale(1.07);
+}
+
 .footer__social__links i{
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Specific Colors for Each Social Media Icon */
+.footer__social__links a:nth-child(1) {
+    background-color: black; /* Twitter blue */
+    border-radius: 50%;
+}
+
+.footer__social__links a .fa-facebook-f {
+    background-color: #1877F2; /* Facebook blue */
+}
+
+.footer__social__links a .fa-linkedin {
+    background-color: #0A66C2; /* LinkedIn blue */
+}
+
+.footer__social__links a .fa-pinterest-p {
+    background-color: #E60023; /* Pinterest red */
+}
+
+.footer__social__links a .fa-rss {
+    background-color: #FFA500; /* RSS orange */
 }
 
 .footer__rental{
