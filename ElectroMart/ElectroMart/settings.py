@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-sdw=_!b*=verg$zi132dcthhuk4o97e5w^_4ombwr$3uk5g96$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ElectroMart.settings'
 
 ALLOWED_HOSTS = []
 
@@ -114,11 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Karachi'
+USE_TZ = True
 
 USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

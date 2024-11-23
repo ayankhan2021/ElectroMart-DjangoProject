@@ -1,5 +1,9 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
+import time
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -7,6 +11,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+@receiver(post_save, sender=User)
+def create_customer(sender, instance, created, **kwargs):
+    if created:  # This ensures the signal runs only when a new user is created
+        Customer.objects.create(user=instance)
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -46,23 +55,40 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     added_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def total_price(self):
+        return self.product.price * self.quantity
+
     def __str__(self):
         return f'{self.quantity} of {self.product.name}'
 
-
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Processing', 'Processing'),
+        ('Shipped', 'Shipped'),
+        ('Delivered', 'Delivered'),
+        ('Cancelled', 'Cancelled'),
+    ]
+
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=100, default='Processing')
+
     def __str__(self):
-        return f'Order {self.id} by {self.customer}'
+        return f"Order {self.id} by {self.customer.user.username}"
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    @property
+    def total_price(self):
+        return self.quantity * self.product.price
 
     def __str__(self):
         return f'{self.quantity} of {self.product.name} in order {self.order.id}'
@@ -71,7 +97,10 @@ class OrderItem(models.Model):
 class Review(models.Model):
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField(default=1)  # Rating out of 5
+    rating = models.PositiveIntegerField(
+        default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(5)]  # Rating between 1 and 5
+    )
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -80,48 +109,23 @@ class Review(models.Model):
 
 
 class Payment(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    payment_number = models.IntegerField()
-    payment_menthod = models.CharField(max_length=50)
-    payment_date = models.DateField()
+    PAYMENT_METHOD_CHOICES = [
+        ('credit_card', 'Credit Card'),
+        ('debit_card', 'Debit Card'),
+        ('paypal', 'PayPal'),
+        ('cod', 'Cash on Delivery'),
+    ]
+
+    order = models.OneToOneField(Order, on_delete=models.SET_NULL, null=True, related_name='payment')
+    payment_method = models.CharField(max_length=50, choices=PAYMENT_METHOD_CHOICES)
+    payment_number = models.CharField(
+        max_length=20, blank=True, null=True, help_text="e.g., Last 4 digits of the card"
+    )
+    payment_date = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
-# class Payment(models.Model):
-#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-#     payment_method = models.CharField(max_length=20, choices=[
-#         ('Credit Card', 'Credit Card'),
-#         ('Debit Card', 'Debit Card'),
-#         ('PayPal', 'PayPal'),
-#         ('Bank Transfer', 'Bank Transfer')
-#     ])
-#     payment_date = models.DateTimeField(auto_now_add=True)
-#     payment_status = models.CharField(max_length=20, choices=[
-#         ('Pending', 'Pending'),
-#         ('Completed', 'Completed'),
-#         ('Failed', 'Failed'),
-#         ('Refunded', 'Refunded')
-#     ])
-#     transaction_id = models.CharField(max_length=100, unique=True)
-
-#     def __str__(self):
-#         return f"Payment {self.transaction_id} for Order {self.order.id}"
-
-
-# class Address(models.Model):
-#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE ,related_name='addresses')
-#     address_type = models.CharField(max_length=10, choices=[
-#         ('Billing', 'Billing'),
-#         ('Shipping', 'Shipping')
-#     ])
-#     address_line1 = models.CharField(max_length=255)
-#     address_line2 = models.CharField(max_length=255, blank=True, null=True)
-#     city = models.CharField(max_length=100)
-#     state = models.CharField(max_length=100)
-#     postal_code = models.CharField(max_length=20)
-#     country = models.CharField(max_length=100)
-    
-#     def __str__(self):
-#         return f"{self.address_type} Address for {self.customer.name}"
+    def __str__(self):
+        return f"Payment for Order {self.order.id} via {self.get_payment_method_display()}"
 
 class TrackingDetails(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)  # One order can have many tracking details

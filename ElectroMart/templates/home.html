@@ -7,20 +7,16 @@
 
 {% block body %}
 <div class="header-container">
-        <div class="select">
-            <select class="categorySelect">
-                <option value="" disabled selected hidden>Browse Categories</option>
-                <option value="headphones-audio.html">Headphones & Audio</option>
-                <option value="mobile-phones.html">Mobile Phones</option>
-                <option value="cameras.html">Cameras</option>
-                <option value="gaming-accessories.html">Gaming Accessories</option>
-                <option value="audio-devices.html">Audio Devices</option>
-                <option value="televisions-projectors.html">Televisions & Projectors</option>
-            </select>
-            
-            <div class="select_arrow">
-            </div>
-        </div>
+    <div class="select">
+        <select class="categorySelect" onchange="location = this.value;">
+            <option value="" disabled selected hidden>Browse Categories</option>
+            {% for category in categories %}
+                <option value="{% url 'products' category.id %}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    
+        <div class="select_arrow"></div>
+    </div>
     <div class="search-container">
         <input type="text" placeholder="Search product..." class="search-input">
         <button class="search-button"><i class="fa-solid fa-2xl fa-magnifying-glass"
@@ -89,13 +85,14 @@
     <button><img class="prev" src="{% static 'svgs/prev.svg' %}" alt=""></button>
     <div class="products">
         <div class="products_wrapper">
+            {% for product in products %}
             <div class="product_item">
                 <div class="product_image">
-                    <img src="{% static 'images/two.png' %}" alt="">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 </div>
                 <div class="product_desc">
                     <div class="product_title">
-                        iPhone 1 Pro | The ultimate iPhone.
+                        {{ product.name }}
                     </div>
                     <div class="product_rating">
                         <i class="fa-solid fa-star" ></i>
@@ -105,224 +102,19 @@
                         <i class="fa-solid fa-star" ></i>
                     </div>
                     <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
+                        <span class="price" style="color: #000;font-size: 20px;">${{ product.price }} <small></small></span>
                     </div>
                 </div>
                 <div class="links">
                     <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
+                        <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
                         <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 2 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/two.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 3 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 4 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 5 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 6 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 7 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 8 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                                <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item">
-                <div class="product_image">
-                    <img src="{% static 'images/one.png' %}" alt="">
-                </div>
-                <div class="product_desc">
-                    <div class="product_title">
-                        iPhone 9 Pro | The ultimate iPhone.
-                    </div>
-                    <div class="product_rating">
-                        <i class="fa-solid fa-star" ></i>
-                        <i class="fa-solid fa-star" ></i>
-                        <i class="fa-solid fa-star" ></i>
-                        <i class="fa-solid fa-star" ></i>
-                        <i class="fa-solid fa-star" ></i>
-                    </div>
-                    <div class="product_price">
-                        <span class="price" style="color: #000;font-size: 20px;">$999 <small></small></span>
-                    </div>
-                </div>
-                <div class="links">
-                    <div class="button-container">
-                        <button class="add-to-cart">ADD TO CART</button>
-                        <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+            
+            
         </div>
     </div>
     <button><img class="next" src="{% static 'svgs/next.svg' %}" alt=""></button>
@@ -406,7 +198,7 @@
                         </div>
                         <div class="cat_links">
                             <div class="cat-button-container">
-                                <button class="add-to-cart">ADD TO CART</button>
+                                <button class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
                                 <button class="wishlist"><i class="fa-regular fa-heart"></i></button>
                             </div>
                         </div>

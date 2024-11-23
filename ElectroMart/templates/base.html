@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/de9e1561cd.js"
       crossorigin="anonymous" defer></script>
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
@@ -14,6 +15,7 @@
   </head>
   <body>
     <div class="main__home">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
       <nav class="navbar">
         <div class="logo"><a href="{% url 'home' %}"><img
               src="{% static './images/logobg.png' %}"
@@ -123,5 +125,4 @@
     <script src="{% static 'js/base.js' %}"></script>
     {% block extra_js %}{% endblock %}
   </body>
-
 </html>

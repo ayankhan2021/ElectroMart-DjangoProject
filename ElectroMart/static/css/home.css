@@ -462,11 +462,13 @@ body {
     width: 342px;
     height: 500px;
     cursor: pointer;
-
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding-top: 20px;
 }
 
 .product_desc {
-    margin-top: 25px;
+    margin: 12px 32px;
     height: 183px;
 }
 
@@ -488,10 +490,10 @@ body {
 }
 
 .product_image img {
-    width: 270px;
-    height: 270px;
-    object-fit: contain;
-
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    z-index: -111;
 }
 
 
@@ -566,7 +568,7 @@ body {
 }
 
 .product_item:hover img {
-    transform: scale(1.07);
+    transform: scale(1.03);
     transition: transform 0.3s ease-in-out;
 }
 

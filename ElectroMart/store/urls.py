@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import product_list_api
 
 
 urlpatterns = [
@@ -13,16 +12,26 @@ urlpatterns = [
     path('userDashboard/orders',views.orders,name='my_orders'),
     path('logout/', views.logout_view, name='logout'),
     path('userDashboard/reviews',views.review_dashboard , name='reviews'),    
-    # path('products/', views.product_list, name='product_list'),  # Updated path for listing all products
+    path('products/', views.products_view, name='product_list'),  # Updated path for listing all products
+    path('products/<int:category_id>/', views.products_view, name='products'),
     # path('products/<int:product_id>/', views.product_detail, name='product_detail'), #single product
     path('categories/', views.categories, name='categories'),
     path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
-    path('cart/', views.cart_view, name='cart_view'),
-    # path('cart/add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
-    # path('cart/remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),    
-    # path('checkout/', views.checkout, name='checkout'),
-    # path('order/<int:order_id>/', views.order_detail, name='order_detail'),
-    # path('logout/', views.logout_user, name='logout'),
-    # path('tracking/<int:order_id>/', views.tracking_details, name='tracking_details'),
-    path('products/', product_list_api, name='product_list_api')
+    path('cart/', views.cart_view, name='cart'),
+    path('product_description/', views.product_description, name='product_description'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('update-cart/<int:item_id>/', views.update_cart, name='update_cart'),
+    path('cart/remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),   
+    path('checkout/', views.checkout, name='checkout'),
+    path('order-success/<int:order_id>/', views.order_success, name='order_success'),
+    path('order-success/<int:order_id>/download-receipt/', views.download_receipt, name='download_receipt'),
+    path('order/<int:order_id>/details/', views.order_details, name='order_details'),
+    path('order/<int:order_id>/', views.order_details, name='order_detail'),
+    path("product/<int:product_id>/", views.product_description, name="product_description"),
+    path("product_description/<int:product_id>/submit_review/", views.submit_review, name="submit_review"),
 ]
+
+# # href="{% url 'product:detail' item.product.slug %}
+# # <button type="submit"><a class="update update-btn"
+# href="{% url 'update_cart' item.id %}">Update Cart</a></button>
+# # "

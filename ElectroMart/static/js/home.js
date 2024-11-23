@@ -144,7 +144,7 @@ if (totalCatItems <= 3) {
     document.querySelector('.cat_next').style.display = 'none';
 }
 
-function slideToNextCat(){
+function slideToNextCat() {
     if (CatIndex == totalCatItems - 2) {
         CatIndex = 0;
     }
@@ -152,7 +152,7 @@ function slideToNextCat(){
     CatIndex = (CatIndex + 1) % totalCatItems;
 }
 
-function slideToPreviousCat(){  
+function slideToPreviousCat() {
     if (CatIndex == 0) {
         CatIndex = totalCatItems - 2;
     }
@@ -167,22 +167,22 @@ if (totalCatItems > 3) {
 
 let a = {
     "product": {
-      "name": "iPhone 8 Pro",
-      "description": "The ultimate iPhone.",
-      "image_url": "url_to_image_here",
-      "rating": 5,
-      "price": 999,
-      "currency": "$",
-      "add_to_cart_text": "ADD TO CART",
-      "wishlist_icon": "url_to_wishlist_icon_here"
+        "name": "iPhone 8 Pro",
+        "description": "The ultimate iPhone.",
+        "image_url": "url_to_image_here",
+        "rating": 5,
+        "price": 999,
+        "currency": "$",
+        "add_to_cart_text": "ADD TO CART",
+        "wishlist_icon": "url_to_wishlist_icon_here"
     }
-} 
+}
 
 
 const selectElements = document.getElementsByTagName('select');
 
 for (let i = 0; i < selectElements.length; i++) {
-    selectElements[i].addEventListener('change', function() {
+    selectElements[i].addEventListener('change', function () {
         const selectedCategory = this.value;
         if (selectedCategory) {
             const baseURL = 'http://127.0.0.1:8000/';
@@ -191,3 +191,33 @@ for (let i = 0; i < selectElements.length; i++) {
     });
 }
 
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.dataset.productId;
+
+            fetch('/cart/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message); // Show success message
+                    } else {
+                        alert(data.message); // Show error message
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+});

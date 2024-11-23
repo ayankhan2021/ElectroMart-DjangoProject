@@ -1,117 +1,162 @@
-{% extends "base.html" %}
 {% load static %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/userdashboard.css' %}">
+<style>
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dashboard Container */
+.dashboard {
+    max-width: 1200px;
+    margin: 30px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Header Styling */
+.dashboard h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.dashboard h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Orders Table */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.orders-table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.orders-table th,
+.orders-table td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.orders-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.orders-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Tracking Details */
+td strong {
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #333;
+}
+
+/* Buttons and Links */
+.dashboard a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dashboard a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard h1 {
+        font-size: 22px;
+    }
+
+    .dashboard h2 {
+        font-size: 18px;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+</style>
 {% endblock %}
 
-{% block body %}
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome, {{ customer.user.username }}</h1>
+    <h2>Your Dashboard</h2>
 
-<div class="profile__main__header">
-    <h1>Dashboard</h1>
-</div>
-
-<section
-    style="background: #f5f8fa; padding: 90px 0 90px 0; position: relative">
-    <div class="main__user__dashboard container">
-        <div class="profile__dashboard">
-            <div class="profile__view">
-                <img src="{% static './svgs/1-green.svg' %}" alt />
-                <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-                <p>{{ user.email }}</p>
-            </div>
-
-            <ul class="select__view">
-                <li class="dashboard_links buttonActive">
-                    <i class="fa-solid fa-house-chimney"></i><a
-                        href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="dashboard_links">
-                    <i class="fa-solid fa-user"></i><a
-                        href="{% url 'reviews' %}">Reviews</a>
-                </li>
-                <li class="dashboard_links">
-                    <i class="fa-solid fa-calendar-days"></i><a
-                        href="{% url 'my_orders' %}">My Order</a>
-                </li>
-                <li class="dashboard_links">
-                    <i class="fa-solid fa-car"></i><a href="#">My Favorite
-                        Car</a>
-                </li>
-                <li class="dashboard_links">
-                    <i class="fa-solid fa-right-from-bracket"></i><a
-                        id="user-signout">Sign Out</a>
-                </li>
-            </ul>
-        </div>
-        <div class="rentaly__dashboard">
-            <div class="rentaly__dashboard__innerbox1">
-                <div class="rentaly__spec1fication__box">
-                    <i class="fa-regular fa-calendar-check"></i>
-                    <h1>{{ completed_orders }}</h1>
-                    <p>Completed Orders</p>
-                </div>
-                <div class="rentaly__spec1fication__box">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <h1>{{ upcoming_orders }}</h1>
-                    <p>Upcoming Orders</p>
-                </div>
-                <div class="rentaly__spec1fication__box">
-                    <i class="fa-regular fa-calendar-xmark"></i>
-                    <h1>{{ cancelled_orders }}</h1>
-                    <p>Cancel Orders</p>
-                </div>
-                <div class="rentaly__spec1fication__box">
-                    <i class="fa-solid fa-tags"></i>
-                    <h1>{{ cars_rented }}</h1>
-                    <p>Cars Rented</p>
-                </div>
-            </div>
-            <div class="rentaly__dashboard__innerbox2">
-                <h4>My Recent Orders</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Car Name</th>
-                            <th>Booking date</th>
-                            <th>Pick Up Date</th>
-                            <th>Return Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for rental in recent_orders %}
-                        <tr>
-                            <td><span class="order__id">#{{ rental.id
-                                    }}</span></td>
-                            <td>
-                                <p>{{ rental.car.variant.model.manufacturer }}
-                                    {{ rental.car.variant.model.name }}
-                                    {{rental.car.variant.variant_name }}</p>
-                            </td>
-                            <td>
-                                <p>{{ rental.booking_date }}</p>
-                            </td>
-                            <td>
-                                <p>{{ rental.pickup_date }}</p>
-                            </td>
-                            <td>
-                                <p>{{ rental.drop_date }}</p>
-                            </td>
-                            <td> <span class="status"
-                                    style="border: 1px solid #404040; border-radius: 10px;">{{
-                                    rental.status.name }}</span></td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="orders">
+        <h3>Your Orders</h3>
+        {% if orders_with_tracking %}
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Tracking</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in orders_with_tracking %}
+                <tr>
+                    <td>#{{ item.order.id }}</td>
+                    <td>${{ item.order.total_amount }}</td>
+                    <td>{{ item.order.status }}</td>
+                    <td>
+                        {% if item.tracking %}
+                            <strong>Status:</strong> {{ item.tracking.status }}<br>
+                            <strong>Tracking Number:</strong> {{ item.tracking.tracking_number }}<br>
+                            <strong>Courier:</strong> {{ item.tracking.courier_name }}<br>
+                            {% if item.tracking.current_location %}
+                                <strong>Location:</strong> {{ item.tracking.current_location }}<br>
+                            {% endif %}
+                            {% if item.tracking.estimated_delivery %}
+                                <strong>Estimated Delivery:</strong> {{ item.tracking.estimated_delivery|date:"M d, Y" }}<br>
+                            {% endif %}
+                        {% else %}
+                            No tracking details available.
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'order_details' item.order.id %}" class="btn-link">View Details</a> | 
+                        <a href="{% url 'download_receipt' item.order.id %}" class="btn-link">Download Receipt</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>You have no orders yet.</p>
+        {% endif %}
     </div>
-</section>
-
+</div>
 {% endblock %}
 
 {% block extra_js %}

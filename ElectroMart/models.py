@@ -214,3 +214,8 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('customer', 'product', 'rating', 'created_at')
     list_filter = ('product', 'rating')
     search_fields = ('customer__user__username', 'product__name')
+
+
+
+
+

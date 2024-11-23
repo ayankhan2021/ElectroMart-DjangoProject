@@ -3,20 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="cat.css">
+    <title>Document</title>
 </head>
 <body>
-    <div class="parent">
-        <div class="div1 boxes"> </div>
-        <div class="div2 boxes"> </div>
-        <div class="div3 boxes"> </div>
-        <div class="div4 boxes"> </div>
-        <div class="div5 boxes"> </div>
-        <div class="div6 boxes"> </div>
-        <div class="div7 boxes"> </div>
-        <div class="div8 boxes"> </div>
-        <div class="div9 boxes"> </div>
+    <div class="toast" id="toast_notification">
+        <div class="toast__link">
+          <i class="fa-solid fa-xmark"></i>
         </div>
+        <div class="toast__message">
+          <h4 style="color: #121212">Empty</h4>
+          <p>Fill out all the input field</p>
+        </div>
+        <span id="toast-border"></span>
+      </div>
+      
+      <div class="main__wrapper">
+        <div class="wrapper active" id="log">
+          <form role="form" method="post" >
+            <h2>Login</h2>
+      
+            <div class="inputbox">
+              <input
+                type="email"
+                placeholder="Email"
+                style="background: transparent"
+                name="email"
+                id="email"
+              />
+              <i class="fa-solid fa-user"></i>
+            </div>
+      
+            <div class="inputbox">
+              <input
+                type="password"
+                placeholder="Password"
+                style="background: transparent"
+                name="password"
+                id="pswd"
+              />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+      
+            <button class="btn1" type="submit">
+              <a class="account__btn">Login</a>
+            </button>
+      
+            <div class="reminber">
+              <p style="color: #fff">
+                Create an Account?
+                <a href="{% url 'signup' %}" style="color: #179510">&nbsp; Signup</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
 </body>
 </html>

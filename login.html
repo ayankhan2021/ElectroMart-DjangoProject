@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="container"><img id="bg-video" src="image.png"></img>
+        <div class="nav"></div>
+        <div id="log" class="wrapper active" >
+            <h2>LOGIN</h2>
+            <div class="inputbox1">
+                <input type="email" placeholder="Email or phone number" required>
+                <i class='bx bx-user'></i><br>
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt lock'></i>
+            </div>
+            <div><button class="btn1">Log In</button></div>
+
+            <div class="remember"><a href="">Forgotten Password?</a></div>
+            <div class="line"></div>
+            <div class="register">
+                <button id="btn11" class="signup ">Create new account </button>
+            </div>
+        </div>
+        <div id="sign" class="wrapper1 nonactive" >
+            <h2>SIGN UP </h2>
+            <div class="inputbox top-17">
+                <input type="text" placeholder="First Name" required id="fname">
+                <i class='bx bx-user one'></i>
+                <input type="text" placeholder="Last Name" required id="fname">
+                <i class='bx bx-user two'></i>
+                <input type="email" placeholder="Email Address" required id="email">
+                <i class='bx bxs-envelope mail'></i>
+                <input type="text" placeholder="Phone Number" required id="phone">
+                <i class='bx bx-phone'></i>
+                <input type="password" placeholder="Password" id="password" required>
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" placeholder="Confirm Password" id="password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div><button class="btn2"><a href="">Sign Up</a></button></div>
+            <!-- <div class="line1"></div> -->
+            <div class="remember"><a href="">Already have an account?</a></div>
+            <div class="register">
+                <button id="btn22" class="login">Log In</button>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
